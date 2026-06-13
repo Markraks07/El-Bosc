@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Bosc | Restaurante Familiar</title>
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navegación Superior -->
+    <nav class="navbar">
+        <div class="logo">El Bosc</div>
+        <div class="nav-links">
+            <a href="#hero">Inicio</a>
+            <a href="#carta">Carta</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>El sabor de compartir en un entorno único</h1>
+            <p>Restaurante familiar en Barberà del Vallès con especialidades y cocina mediterránea.</p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn btn-primary">Reservar mesa</a>
+                <a href="#carta" class="btn btn-secondary">Ver carta</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Carta Interactiva -->
+    <section id="carta" class="carta-section">
+        <div class="container">
+            <h2 class="section-title">Nuestra Carta</h2>
+            <p class="section-subtitle">Descubre todas nuestras opciones preparadas con ingredientes seleccionados.</p>
+
+            <!-- Categorías de la carta -->
+            <div class="category-nav" id="categoryNav"></div>
+
+            <!-- Contenedor de platos -->
+            <div class="menu-display">
+                <h3 class="category-title" id="currentCategoryTitle">Cargando...</h3>
+                <div class="menu-grid" id="menuGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto y Formulario -->
+    <section id="contacto" class="contacto-section">
+        <div class="container">
+            <h2 class="section-title">Contacto & Reservas</h2>
+            <p class="section-subtitle">Envíanos tu solicitud y te confirmaremos en breve.</p>
+            
+            <div class="contact-grid">
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <h3>Visítanos</h3>
+                    <p>📍 Carrer del Bosc, 105<br>08210 Barberà del Vallès, Barcelona</p>
+                    
+                    <h3>Llámanos</h3>
+                    <p>📞 691 83 05 14</p>
+                    
+                    <h3>Horarios</h3>
+                    <p>🕒 Abierto de Martes a Domingo<br>Lunes cerrado por descanso del personal.</p>
+                </div>
+                
+                <!-- Formulario -->
+                <div class="contact-form-container">
+                    <form id="contactForm">
+                        <input type="text" id="nombre" placeholder="Tu Nombre completo" required>
+                        <input type="tel" id="telefono" placeholder="Tu Teléfono" required>
+                        <input type="number" id="personas" placeholder="Nº de Personas" min="1" required>
+                        <textarea id="mensaje" placeholder="Fecha, hora deseada y comentarios adicionales..." rows="4" required></textarea>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Reserva</button>
+                    </form>
+                    <p id="formStatus" class="form-status"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 El Bosc. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Enlace al archivo JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
