@@ -1,96 +1,752 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Bosc | Restaurante Familiar</title>
-    <!-- Fuentes de Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-    <!-- Enlace al archivo CSS -->
-    <link rel="stylesheet" href="style.css">
+    <title>El Bosc | Restaurante</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Playfair Display (Serif) & Lato (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        app: {
+                            bg: '#F9F7F5', // Crema muy suave de fondo
+                            surface: '#FFFFFF',
+                            text: '#1E3A4A',      // Azul Petróleo Profundo
+                            muted: '#64748B',
+                            accent: '#B87333',    // Terracota Elegante
+                            border: '#E2E8F0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .tap-transparent {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 1.5rem);
+        }
+
+        /* Efecto de línea elegante para inputs */
+        .input-elegant {
+            border: none;
+            border-bottom: 1px solid #EAEAEA;
+            border-radius: 0;
+            background: transparent;
+        }
+
+        .input-elegant:focus {
+            outline: none;
+            border-bottom: 1px solid #171717;
+            box-shadow: none;
+        }
+    </style>
 </head>
-<body>
-    <!-- Navegación Superior -->
-    <nav class="navbar">
-        <div class="logo">El Bosc</div>
-        <div class="nav-links">
-            <a href="#hero">Inicio</a>
-            <a href="#carta">Carta</a>
-            <a href="#contacto">Contacto</a>
+
+<body class="bg-app-bg text-app-text font-sans antialiased pb-20 md:pb-0 selection:bg-app-accent selection:text-white">
+
+    <!-- Header Elegante -->
+    <header class="sticky top-0 z-40 bg-app-bg/90 backdrop-blur-md border-b border-app-border transition-all">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#inicio" class="font-serif text-2xl tracking-wide text-app-text tap-transparent">
+                EL BOSC.
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav
+                class="hidden md:flex items-center gap-10 text-xs tracking-[0.15em] uppercase font-bold text-app-muted">
+                <a href="#nosotros" class="hover:text-app-accent transition-colors">Nosotros</a>
+                <a href="#carta" class="hover:text-app-accent transition-colors">Carta</a>
+                <a href="#galeria" class="hover:text-app-accent transition-colors">Galería</a>
+                <a href="#contacto" class="hover:text-app-accent transition-colors">Ubicación</a>
+                <button onclick="openBookingSheet()"
+                    class="bg-app-text text-white px-6 py-2.5 hover:bg-app-accent transition-colors">
+                    Reservar
+                </button>
+            </nav>
         </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto w-full">
+
+        <!-- Hero Section Editorial -->
+        <section id="inicio" class="px-6 py-20 md:py-32 flex flex-col items-center text-center">
+            <p class="text-xs uppercase tracking-[0.2em] text-app-accent font-bold mb-6">Cocina Tradicional</p>
+            <h1 class="font-serif text-5xl md:text-7xl text-app-text mb-8 leading-tight max-w-4xl">
+                El sabor de siempre, <br><span class="italic font-light">con la atención que mereces.</span>
+            </h1>
+            <p class="text-app-muted text-base md:text-lg mb-12 max-w-xl mx-auto leading-relaxed font-light">
+                Tapas tradicionales, bocadillos especiales y cocina asiática auténtica en un ambiente cuidado y familiar
+                en Barberà del Vallès.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
+                <button onclick="openBookingSheet()"
+                    class="w-full sm:w-auto bg-app-text text-white px-10 py-4 uppercase tracking-widest text-xs font-bold tap-transparent hover:bg-app-accent transition-colors border border-transparent">
+                    Reservar Mesa
+                </button>
+                <a href="#carta"
+                    class="w-full sm:w-auto bg-transparent text-app-text border border-app-text px-10 py-4 uppercase tracking-widest text-xs font-bold tap-transparent hover:bg-app-text hover:text-white transition-colors">
+                    Ver Carta
+                </a>
+            </div>
+        </section>
+
+        <!-- Sobre Nosotros -->
+        <section id="nosotros" class="px-6 py-16 md:py-24 border-t border-app-border">
+            <div class="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
+                <div class="w-full md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80"
+                        alt="Interior" class="w-full h-auto aspect-[4/5] object-cover grayscale-[20%]">
+                </div>
+                <div class="w-full md:w-1/2 space-y-8">
+                    <h2 class="text-xs font-bold text-app-accent uppercase tracking-[0.2em]">Nuestra Historia</h2>
+                    <h3 class="font-serif text-4xl md:text-5xl leading-tight">Tradición que <br><span
+                            class="italic font-light">perdura en el tiempo.</span></h3>
+                    <div class="space-y-4 text-app-muted font-light leading-relaxed">
+                        <p>
+                            En El Bosc, entendemos la gastronomía como un punto de encuentro. Llevamos años sirviendo a
+                            nuestros vecinos de Barberà del Vallès con una filosofía inamovible: respeto por el producto
+                            y devoción por el cliente.
+                        </p>
+                        <p>
+                            Nuestro espacio está diseñado para que disfrutes de una experiencia sosegada, ya sea
+                            saboreando nuestras clásicas bravas, un bocadillo elaborado o dejándote sorprender por
+                            nuestros matices asiáticos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menú Elegante (Lista clásica) -->
+        <section id="carta" class="py-16 md:py-24 bg-white border-t border-app-border">
+            <div class="px-6 text-center mb-12">
+                <h2 class="font-serif text-4xl mb-4">Nuestra Carta</h2>
+                <div class="w-12 h-px bg-app-accent mx-auto"></div>
+            </div>
+
+            <div class="sticky top-20 z-30 bg-white/95 backdrop-blur-md pt-4 pb-6 px-6 border-b border-app-border">
+                <!-- Buscador Fino -->
+                <div class="relative max-w-xl mx-auto mb-6">
+                    <input type="text" id="searchInput" oninput="filterMenu()" placeholder="Buscar..."
+                        class="w-full input-elegant pb-2 pl-8 text-sm placeholder-gray-300">
+                    <i data-lucide="search" class="absolute left-0 top-0 w-4 h-4 text-gray-400"></i>
+                </div>
+
+                <!-- Categorías Textuales -->
+                <div class="flex overflow-x-auto justify-start md:justify-center gap-8 no-scrollbar"
+                    id="category-pills">
+                    <!-- JS -->
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto mt-16 p-8 border border-app-border bg-[#FDFDFC]">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-serif text-2xl text-app-text">Menú del Día</h3>
+                    <span class="text-app-accent font-bold">14,90€</span>
+                </div>
+                <ul class="space-y-3 text-sm text-app-muted font-light italic">
+                    <li>• Primero: Crema de verduras de temporada o Ensalada de la huerta.</li>
+                    <li>• Segundo: Pollo al horno con hierbas provenzales o Merluza a la brasa.</li>
+                    <li>• Incluye: Bebida, postre casero o café.</li>
+                </ul>
+            </div>
+
+            <!-- Contenedor Menú -->
+            <div id="menu-container" class="max-w-3xl mx-auto px-6 py-10 min-h-[40vh]">
+                <!-- JS -->
+            </div>
+        </section>
+
+        <!-- Galería Editorial -->
+        <section id="galeria" class="py-16 md:py-24 border-t border-app-border">
+            <div class="px-6 text-center mb-12">
+                <h2 class="font-serif text-4xl mb-4">Galería</h2>
+                <div class="w-12 h-px bg-app-accent mx-auto"></div>
+            </div>
+
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-12 no-scrollbar">
+                <div class="snap-center shrink-0 w-[80vw] md:w-96 aspect-[3/4] relative group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=600&q=80"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700">
+                    </div>
+                </div>
+                <div class="snap-center shrink-0 w-[80vw] md:w-96 aspect-[3/4] relative group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700">
+                    </div>
+                </div>
+                <div class="snap-center shrink-0 w-[80vw] md:w-96 aspect-[3/4] relative group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reseñas Tipográficas -->
+        <section class="py-16 md:py-24 bg-app-surface border-y border-app-border">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="font-serif text-3xl md:text-4xl mb-12">"Una experiencia impecable."</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="space-y-4">
+                        <div class="flex justify-center text-app-accent mb-4 gap-1">
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-app-muted text-lg leading-relaxed">"Las bravas son
+                            espectaculares y la atención inmejorable. Un lugar al que siempre volvemos."</p>
+                        <p class="text-xs uppercase tracking-widest font-bold pt-2">— María Gómez</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center text-app-accent mb-4 gap-1">
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-app-muted text-lg leading-relaxed">"Cocina honesta, sabores
+                            auténticos y un ambiente muy elegante sin perder la cercanía."</p>
+                        <p class="text-xs uppercase tracking-widest font-bold pt-2">— Jordi R.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-center text-app-accent mb-4 gap-1">
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star"
+                                class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-app-muted text-lg leading-relaxed">"El mejor bocadillo
+                            'Bosquero' de la zona. Es un rincón de calidad indispensable."</p>
+                        <p class="text-xs uppercase tracking-widest font-bold pt-2">— Carlos M.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="especialidades" class="py-24 px-6 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-app-accent tracking-[0.2em] text-xs font-bold uppercase">Selección de Autor</span>
+                    <h2 class="font-serif text-4xl mt-3 text-app-text">Especialidades de la Casa</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=600&q=80"
+                                class="transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <h4 class="font-serif text-xl mb-2">Canelones de la Abuela</h4>
+                        <p class="text-app-muted text-sm leading-relaxed font-light">Receta familiar heredada, con
+                            bechamel trufada y gratinado al punto de sal.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="group cursor-pointer">
+                        <div class="overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1555126384-be4669861633?auto=format&fit=crop&w=600&q=80"
+                                class="transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <h4 class="font-serif text-xl mb-2">Tataki de Atún</h4>
+                        <p class="text-app-muted text-sm leading-relaxed font-light">Atún rojo de almadraba sellado,
+                            marinado en soja artesanal y jengibre fresco.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="group cursor-pointer">
+                        <div class="overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80"
+                                class="transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <h4 class="font-serif text-xl mb-2">Brownie de Bosque</h4>
+                        <p class="text-app-muted text-sm leading-relaxed font-light">Chocolate negro al 70%, nueces
+                            pecaminosas y helado de vainilla bourbon.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto Minimalista -->
+        <section id="contacto" class="px-6 py-16 md:py-24 flex flex-col md:flex-row gap-12">
+            <div class="w-full md:w-1/3 space-y-10">
+                <div>
+                    <h2 class="font-serif text-3xl mb-8">Información</h2>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-[0.15em] font-bold mb-2">Dirección</p>
+                    <p class="font-light text-app-muted">Carrer del Bosc, 105<br>08210 Barberà del Vallès, BCN</p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-[0.15em] font-bold mb-2">Horarios</p>
+                    <p class="font-light text-app-muted">Martes a Domingo: 13:00 - 16:00<br>Viernes y Sábado: 20:00 -
+                        23:30</p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-[0.15em] font-bold mb-2">Contacto</p>
+                    <p class="font-light text-app-muted">691 83 05 14</p>
+                    <a href="tel:691830514"
+                        class="inline-block mt-4 text-xs font-bold uppercase tracking-widest border-b border-app-text pb-1 hover:text-app-accent hover:border-app-accent transition-colors">Llamar
+                        ahora</a>
+                </div>
+            </div>
+            <div class="w-full md:w-2/3 h-[400px] bg-gray-100">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4134.681930586291!2d2.1250518124193274!3d41.52074788759143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a495782ce08673%3A0x4247bd059d2f7ab5!2sEl%20Bosc!5e1!3m2!1ses!2ses!4v1781442385305!5m2!1ses!2ses"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="px-6 py-12 text-center border-t border-app-border">
+            <h2 class="font-serif text-xl tracking-widest text-app-text mb-6">EL BOSC.</h2>
+            <p class="text-xs text-app-muted uppercase tracking-widest">© 2026 Reservados todos los derechos<span
+                    onclick="openAdmin()" class="cursor-pointer text-transparent select-none">.</span></p>
+        </footer>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav
+        class="md:hidden fixed bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-app-border pb-safe pt-3 px-8 flex justify-between z-40">
+        <a href="#inicio" class="flex flex-col items-center gap-1 text-app-text tap-transparent">
+            <i data-lucide="home" class="w-5 h-5 stroke-[1.5]"></i>
+            <span class="text-[9px] uppercase tracking-widest font-bold">Inicio</span>
+        </a>
+        <a href="#carta"
+            class="flex flex-col items-center gap-1 text-gray-400 hover:text-app-text transition-colors tap-transparent">
+            <i data-lucide="book-open" class="w-5 h-5 stroke-[1.5]"></i>
+            <span class="text-[9px] uppercase tracking-widest font-bold">Carta</span>
+        </a>
+        <button onclick="openBookingSheet()"
+            class="flex flex-col items-center gap-1 text-app-accent hover:text-app-text transition-colors tap-transparent">
+            <i data-lucide="calendar" class="w-5 h-5 stroke-[1.5]"></i>
+            <span class="text-[9px] uppercase tracking-widest font-bold">Reserva</span>
+        </button>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <h1>El sabor de compartir en un entorno único</h1>
-            <p>Restaurante familiar en Barberà del Vallès con especialidades y cocina mediterránea.</p>
-            <div class="hero-buttons">
-                <a href="#contacto" class="btn btn-primary">Reservar mesa</a>
-                <a href="#carta" class="btn btn-secondary">Ver carta</a>
+    <!-- MODAL RESERVAS: Estilo Invitación -->
+    <div id="booking-sheet" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" onclick="closeBookingSheet()"></div>
+
+        <div
+            class="absolute bottom-0 left-0 right-0 bg-white p-8 pb-12 md:pb-10 md:relative md:top-1/2 md:-translate-y-1/2 md:max-w-lg md:mx-auto animate-slide-up shadow-2xl flex flex-col max-h-[95vh] rounded-t-xl md:rounded-xl">
+
+            <div class="flex justify-between items-start mb-8 shrink-0">
+                <div>
+                    <h3 class="font-serif text-3xl mb-1">Solicitar Mesa</h3>
+                    <p class="text-xs text-app-muted uppercase tracking-widest">Complete su información</p>
+                </div>
+                <button onclick="closeBookingSheet()" class="p-2 text-gray-400 hover:text-black transition-colors">
+                    <i data-lucide="x" class="w-6 h-6 stroke-[1]"></i>
+                </button>
+            </div>
+
+            <div class="overflow-y-auto no-scrollbar flex-1">
+                <form id="booking-form" onsubmit="handleBooking(event)" class="space-y-6">
+                    <div>
+                        <input type="text" id="res-name" required placeholder="Nombre y Apellidos"
+                            class="w-full input-elegant pb-3 text-sm">
+                    </div>
+                    <div>
+                        <input type="tel" id="res-phone" required placeholder="Teléfono de contacto"
+                            class="w-full input-elegant pb-3 text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <input type="date" id="res-date" required
+                            class="w-full input-elegant pb-3 text-sm text-gray-600">
+                        <select id="res-time" required
+                            class="w-full input-elegant pb-3 text-sm text-gray-600 appearance-none bg-transparent">
+                            <option value="" hidden>Hora</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="20:30">20:30</option>
+                            <option value="21:00">21:00</option>
+                            <option value="21:30">21:30</option>
+                            <option value="22:00">22:00</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select id="res-guests" required
+                            class="w-full input-elegant pb-3 text-sm text-gray-600 appearance-none bg-transparent">
+                            <option value="" hidden>Número de comensales</option>
+                            <option value="1">1 Persona</option>
+                            <option value="2">2 Personas</option>
+                            <option value="3">3 Personas</option>
+                            <option value="4">4 Personas</option>
+                            <option value="5">5 Personas</option>
+                            <option value="6">6 Personas</option>
+                            <option value="7+">7 o más (Grupo)</option>
+                        </select>
+                    </div>
+
+                    <button id="submit-btn" type="submit"
+                        class="w-full bg-app-text text-white py-5 uppercase tracking-widest text-xs font-bold mt-6 tap-transparent hover:bg-app-accent transition-colors flex items-center justify-center gap-2">
+                        Confirmar Reserva
+                    </button>
+                </form>
+
+                <!-- Estado de Éxito -->
+                <div id="booking-success" class="hidden text-center py-12">
+                    <h4 class="font-serif text-3xl mb-4 text-app-accent">Mesa Confirmada</h4>
+                    <p class="text-sm text-app-muted mb-10 font-light leading-relaxed">Su solicitud ha sido registrada
+                        correctamente. Le esperamos en El Bosc.</p>
+                    <button onclick="closeBookingSheet()"
+                        class="w-full border border-app-text text-app-text uppercase tracking-widest text-xs font-bold py-4 hover:bg-app-text hover:text-white transition-colors">Cerrar</button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Sección Carta Interactiva -->
-    <section id="carta" class="carta-section">
-        <div class="container">
-            <h2 class="section-title">Nuestra Carta</h2>
-            <p class="section-subtitle">Descubre todas nuestras opciones preparadas con ingredientes seleccionados.</p>
+    <!-- PANEL ADMIN INVISIBLE -->
+    <div id="admin-modal" class="fixed inset-0 z-[60] hidden bg-app-bg/95 backdrop-blur-sm">
+        <div class="h-full w-full max-w-3xl mx-auto flex flex-col bg-white border-x border-app-border shadow-2xl">
+            <div class="px-8 py-6 border-b border-app-border flex justify-between items-center bg-white sticky top-0">
+                <div>
+                    <h3 class="font-serif text-2xl">Gestión de Reservas</h3>
+                </div>
+                <button onclick="closeAdmin()" class="p-2 text-gray-400 hover:text-black transition-colors">
+                    <i data-lucide="x" class="w-6 h-6 stroke-[1]"></i>
+                </button>
+            </div>
 
-            <!-- Categorías de la carta -->
-            <div class="category-nav" id="categoryNav"></div>
+            <div class="p-8 border-b border-app-border bg-white">
+                <input type="text" id="adminSearch" oninput="filterAdmin()" placeholder="Buscar cliente..."
+                    class="w-full input-elegant pb-2 text-sm text-gray-600">
+            </div>
 
-            <!-- Contenedor de platos -->
-            <div class="menu-display">
-                <h3 class="category-title" id="currentCategoryTitle">Cargando...</h3>
-                <div class="menu-grid" id="menuGrid"></div>
+            <div class="flex-1 overflow-y-auto p-8 no-scrollbar bg-gray-50/30">
+                <div id="admin-list" class="space-y-6">
+                    <!-- Cards inyectadas por JS -->
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Contacto y Formulario -->
-    <section id="contacto" class="contacto-section">
-        <div class="container">
-            <h2 class="section-title">Contacto & Reservas</h2>
-            <p class="section-subtitle">Envíanos tu solicitud y te confirmaremos en breve.</p>
+    <script>
+        lucide.createIcons();
+
+        // API CONFIG
+        const SHEETDB_URL = 'https://sheetdb.io/api/v1/z7705w766mkyw';
+        const ADMIN_PASS = 'bosc105';
+
+        // DATOS DEL MENÚ
+        const menuData = [
+            {
+                id: 'bocadillos', title: 'Bocadillos', items: [
+                    { name: 'Lomo o Pechuga', desc: 'A la plancha. Suplemento queso +0,50€', price: '4,50€' },
+                    { name: 'Bosquero Especial', desc: 'Bacon, queso, frankfurt y cebolla confitada', price: '6,50€' },
+                    { name: 'Serranito', desc: 'Lomo tierno, queso, jamón serrano y tomate natural', price: '6,50€' },
+                    { name: 'Hamburguesa Completa', desc: 'Carne 100% vacuno con lechuga, tomate y queso', price: '7,80€' },
+                    { name: 'Bikini Clásico', desc: 'Jamón dulce y queso fundido', price: '2,80€' }
+                ]
+            },
+            {
+                id: 'tapas', title: 'Tapas Clásicas', items: [
+                    { name: 'Patatas Bravas', desc: 'Nuestra salsa secreta ligeramente picante', price: '5,00€' },
+                    { name: 'Calamares a la Andaluza', desc: 'Fritura limpia, crujiente y tiernos por dentro', price: '7,00€' },
+                    { name: 'Chocos Fritos', desc: 'Ración generosa ideal para compartir', price: '7,50€' },
+                    { name: 'Pimientos de Padrón', desc: 'Salteados con sal gruesa', price: '7,50€' },
+                    { name: 'Tiras de Pollo', desc: 'Acompañadas de suave salsa mostaza y miel', price: '6,50€' },
+                    { name: 'Croquetas de la Casa', desc: 'Elaboración artesanal (6 uds)', price: '4,50€' }
+                ]
+            },
+            {
+                id: 'asiatico', title: 'Toque Asiático', items: [
+                    { name: 'Arroz Frito Especial', desc: 'Selección de carnes, gambas y verduras al wok', price: '8,00€' },
+                    { name: 'Tallarines Fritos', desc: 'A elegir: ternera, pollo o gambas', price: '6,50€' },
+                    { name: 'Pollo al Limón', desc: 'Crujiente con salsa cítrica dulce', price: '6,50€' },
+                    { name: 'Ternera con Setas', desc: 'Salteado tradicional en salsa de ostras', price: '7,00€' },
+                    { name: 'Rollitos de Primavera', desc: 'Crujientes con salsa agridulce (2 uds)', price: '4,50€' }
+                ]
+            },
+            {
+                id: 'platos', title: 'Platos Principales', items: [
+                    { name: 'Entrecot de Ternera', desc: 'Corte seleccionado con patatas y ensalada', price: '10,50€' },
+                    { name: 'Chuletas de Cordero', desc: 'A la brasa con guarnición tradicional', price: '11,00€' },
+                    { name: 'Merluza a la Plancha', desc: 'Pescado fresco con ensalada ligera', price: '10,50€' },
+                    { name: 'Ensalada de Aguacate', desc: 'Brotes, tomate y láminas de salmón', price: '7,00€' }
+                ]
+            }
+        ];
+
+        let currentCategory = 'bocadillos';
+
+        window.onload = () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('res-date').min = today;
+            renderPills();
+            renderMenu();
+        };
+
+        function renderPills() {
+            const container = document.getElementById('category-pills');
+            container.innerHTML = menuData.map(cat => `
+                <button onclick="changeCat('${cat.id}')" 
+                    class="snap-start whitespace-nowrap pb-2 text-xs uppercase tracking-widest font-bold transition-all tap-transparent
+                    ${currentCategory === cat.id ? 'text-app-text border-b-2 border-app-accent' : 'text-gray-400 border-b-2 border-transparent hover:text-app-text'}">
+                    ${cat.title}
+                </button>
+            `).join('');
+        }
+
+        function changeCat(id) {
+            currentCategory = id;
+            document.getElementById('searchInput').value = '';
+            renderPills();
+            renderMenu();
+        }
+
+        function renderMenu(searchQuery = '') {
+            const container = document.getElementById('menu-container');
+            let html = '';
+
+            menuData.forEach(cat => {
+                if (searchQuery || currentCategory === cat.id) {
+                    const filteredItems = cat.items.filter(item =>
+                        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        item.desc.toLowerCase().includes(searchQuery.toLowerCase())
+                    );
+
+                    if (filteredItems.length > 0) {
+                        html += `
+                            <div class="animate-fade-in mb-10">
+                                ${searchQuery ? `<h3 class="font-serif text-2xl text-app-accent mb-6">${cat.title}</h3>` : ''}
+                                <div class="space-y-6">
+                                    ${filteredItems.map(item => `
+                                        <div class="group flex justify-between items-baseline gap-4 border-b border-app-border border-dashed pb-4">
+                                            <div class="flex-1 pr-4">
+                                                <h4 class="font-bold text-sm tracking-wide text-app-text uppercase mb-1">${item.name}</h4>
+                                                <p class="text-sm text-app-muted font-light italic">${item.desc}</p>
+                                            </div>
+                                            <div class="font-bold text-sm text-app-text shrink-0">${item.price}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            });
+
+            container.innerHTML = html || `<div class="text-center py-12 text-app-muted font-light italic">No se encontraron platos.</div>`;
+        }
+
+        function filterMenu() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                document.querySelectorAll('#category-pills button').forEach(b => {
+                    b.className = 'snap-start whitespace-nowrap pb-2 text-xs uppercase tracking-widest font-bold transition-all tap-transparent text-gray-400 border-b-2 border-transparent';
+                });
+            } else {
+                renderPills();
+            }
+            renderMenu(query);
+        }
+
+        // MODAL RESERVAS
+        const sheet = document.getElementById('booking-sheet');
+        function openBookingSheet() { sheet.classList.remove('hidden'); }
+        function closeBookingSheet() {
+            sheet.classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('booking-form').reset();
+                document.getElementById('booking-form').classList.remove('hidden');
+                document.getElementById('booking-success').classList.add('hidden');
+            }, 300);
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Procesando...`;
+            lucide.createIcons();
+
+            const payload = {
+                data: [{
+                    nombre: document.getElementById('res-name').value,
+                    telefono: document.getElementById('res-phone').value,
+                    fecha: document.getElementById('res-date').value,
+                    hora: document.getElementById('res-time').value,
+                    comensales: document.getElementById('res-guests').value,
+                    registro: new Date().toLocaleString('es-ES')
+                }]
+            };
+
+            fetch(SHEETDB_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                document.getElementById('booking-form').classList.add('hidden');
+                document.getElementById('booking-success').classList.remove('hidden');
+            }).finally(() => {
+                btn.innerHTML = `Confirmar Reserva`;
+            });
+        }
+
+        // PANEL ADMIN
+        let adminData = [];
+        function openAdmin() {
+            const pass = prompt("");
+            if (pass === ADMIN_PASS) {
+                document.getElementById('admin-modal').classList.remove('hidden');
+                loadAdminData();
+            }
+        }
+        function closeAdmin() { document.getElementById('admin-modal').classList.add('hidden'); }
+
+        function loadAdminData() {
+            const list = document.getElementById('admin-list');
+            list.innerHTML = `<div class="text-center py-10 font-light italic text-app-muted">Cargando reservas...</div>`;
+
+            fetch(SHEETDB_URL)
+                .then(r => r.json())
+                .then(data => {
+                    adminData = Array.isArray(data) ? data.reverse() : [];
+                    renderAdminList(adminData);
+                });
+        }
+
+        function renderAdminList(data) {
+            const list = document.getElementById('admin-list');
+            if (data.length === 0) return list.innerHTML = `<div class="text-center py-10 font-light italic text-app-muted">Sin reservas registradas.</div>`;
+
+            list.innerHTML = data.map((item, index) => {
+                const waLink = `https://wa.me/34${item.telefono.replace(/\s+/g, '')}`;
+                return `
+        <div class="bg-white p-6 border border-app-border relative mb-4 shadow-sm">
+            <div class="absolute top-0 left-0 w-1 h-full bg-app-accent"></div>
             
-            <div class="contact-grid">
-                <!-- Información de contacto -->
-                <div class="contact-info">
-                    <h3>Visítanos</h3>
-                    <p>📍 Carrer del Bosc, 105<br>08210 Barberà del Vallès, Barcelona</p>
-                    
-                    <h3>Llámanos</h3>
-                    <p>📞 691 83 05 14</p>
-                    
-                    <h3>Horarios</h3>
-                    <p>🕒 Abierto de Martes a Domingo<br>Lunes cerrado por descanso del personal.</p>
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wide text-app-text">${item.nombre}</h4>
+                    <p class="text-xs text-app-muted">${item.telefono} | ${item.comensales} pax</p>
                 </div>
+                <div class="text-right">
+                    <span class="block text-xs font-bold text-gray-500">${item.fecha}</span>
+                    <span class="block text-sm font-bold text-app-text">${item.hora}h</span>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-center pt-4 border-t border-gray-50">
+                <a href="${waLink}" target="_blank" class="flex items-center gap-1.5 text-green-700 bg-green-50 px-3 py-1.5 rounded-lg text-[10px] font-bold hover:bg-green-100 transition-colors">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp
+                </a>
                 
-                <!-- Formulario -->
-                <div class="contact-form-container">
-                    <form id="contactForm">
-                        <input type="text" id="nombre" placeholder="Tu Nombre completo" required>
-                        <input type="tel" id="telefono" placeholder="Tu Teléfono" required>
-                        <input type="number" id="personas" placeholder="Nº de Personas" min="1" required>
-                        <textarea id="mensaje" placeholder="Fecha, hora deseada y comentarios adicionales..." rows="4" required></textarea>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Reserva</button>
-                    </form>
-                    <p id="formStatus" class="form-status"></p>
+                <div class="flex ml-auto gap-3">
+                    <button onclick="editReserva('${item.telefono}')" class="text-[10px] uppercase font-bold text-app-text hover:text-app-accent transition-colors">Editar</button>
+                    <button onclick="deleteReserva('${item.telefono}')" class="text-[10px] uppercase font-bold text-red-600 hover:text-red-700 transition-colors">Cancelar</button>
                 </div>
             </div>
         </div>
-    </section>
+    `}).join('');
+            lucide.createIcons();
+        }
 
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <p>&copy; 2026 El Bosc. Todos los derechos reservados.</p>
+        // Función para eliminar
+        function deleteReserva(telefono) {
+            if (confirm("¿Seguro que deseas cancelar la reserva de " + telefono + "?")) {
+                // Ajusta la ruta según cómo SheetDB gestione tus IDs
+                fetch(`${SHEETDB_URL}/telefono/${telefono}`, {
+                    method: 'DELETE',
+                }).then(() => {
+                    alert("Reserva cancelada.");
+                    loadAdminData();
+                });
+            }
+        }
+
+        // Variable global para guardar el teléfono de la reserva que estamos editando
+        let editingPhone = null;
+
+        function editReserva(telefono) {
+            editingPhone = telefono;
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        // Lógica para enviar la actualización
+        function guardarEdicion() {
+            const editForm = document.getElementById('edit-form');
+
+            // Obtenemos los valores directamente al momento de guardar
+            const payload = {
+                fecha: document.getElementById('edit-date').value,
+                hora: document.getElementById('edit-time').value,
+                comensales: document.getElementById('edit-guests').value
+            };
+
+            fetch(`${SHEETDB_URL}/telefono/${editingPhone}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert("Reserva actualizada correctamente.");
+                document.getElementById('edit-modal').classList.add('hidden');
+                loadAdminData();
+            });
+        }
+
+        function filterAdmin() {
+            const q = document.getElementById('adminSearch').value.toLowerCase();
+            const filtered = adminData.filter(d => d.nombre?.toLowerCase().includes(q) || d.telefono?.includes(q));
+            renderAdminList(filtered);
+        }
+    </script>
+    <div id="edit-modal"
+        class="fixed inset-0 z-[70] hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-6">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-8 shadow-2xl">
+            <h3 class="font-serif text-xl mb-6">Editar Reserva</h3>
+            <div id="edit-form" class="space-y-4">
+                <input type="hidden" id="edit-id">
+                <input type="date" id="edit-date" class="w-full input-elegant pb-2 text-sm" required>
+                <input type="time" id="edit-time" class="w-full input-elegant pb-2 text-sm" required>
+                <input type="number" id="edit-guests" placeholder="Nº Personas"
+                    class="w-full input-elegant pb-2 text-sm" required>
+
+                <div class="flex gap-4 mt-8">
+                    <button type="button" onclick="document.getElementById('edit-modal').classList.add('hidden')"
+                        class="flex-1 py-3 text-xs font-bold uppercase border border-gray-200">Cancelar</button>
+                    <button type="button" onclick="guardarEdicion()"
+                        class="flex-1 py-3 text-xs font-bold uppercase bg-app-text text-white">Guardar</button>
+                </div>
+            </div>
         </div>
-    </footer>
-
-    <!-- Enlace al archivo JavaScript -->
-    <script src="script.js"></script>
+    </div>
 </body>
+
 </html>
